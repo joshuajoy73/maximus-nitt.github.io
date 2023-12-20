@@ -108,6 +108,7 @@ while (memberId != '999') {
 }
 const button = document.createElement('button');
 button.textContent = "mathcontest details";
+ eventsList.appendChild(item);
 
 button.addEventListener("click", function execute() {
     let name = 'AAA';
