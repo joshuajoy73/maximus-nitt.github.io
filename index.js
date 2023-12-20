@@ -120,13 +120,13 @@ while (memberId != '999') {
                         const open = document.getElementById("open");
                         open.textContent = textdata;
 
-                       
+                         eventsList.appendChild("open");
                         const button = document.createElement("button");
-                        button.textContent = "content";
+                        button.textContent = "contents";
 
                        
                         button.addEventListener("click", function () {
-                            const cname = 'AAA'; // Change this if needed
+                            const cname = 'AAA'; //change this if needed
                             fetch("content/" + cname + ".json")
                                 .then(response => {
                                     if (!response.ok) {
@@ -141,15 +141,18 @@ while (memberId != '999') {
                                 .catch((error) => {
                                     console.log("Error has been found:", error);
                                 });
+                              eventsList.appendChild("content");
                                 cname=predecessor(cname);
                         });
 
                        
                         document.body.appendChild(button);
                     })
+                    
                     .catch((error) => {
                         console.log("Error has been found:", error);
                     });
+                
             };
 
             while (name !== '999') {
