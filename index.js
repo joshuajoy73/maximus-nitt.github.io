@@ -106,3 +106,54 @@ while (memberId != '999') {
         .catch(error => console.log(error));
     memberId = predecessor(memberId);
 }
+ function execute() {
+            let name = 'AAA';
+            const fetchData = () => {
+                fetch("mathcontest01/" + name + ".json")
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("There is an error here");
+                        }
+                        return response.text();
+                    })
+                    .then(textdata => {
+                        const open = document.getElementById("open");
+                        open.textContent = textdata;
+
+                       
+                        const button = document.createElement("button");
+                        button.textContent = "content";
+
+                       
+                        button.addEventListener("click", function () {
+                            const cname = 'AAA'; // Change this if needed
+                            fetch("content/" + cname + ".json")
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error("There is an error here");
+                                    }
+                                    return response.text();
+                                })
+                                .then(textdata => {
+                                    const content = document.getElementById("content");
+                                    content.textContent = textdata;
+                                })
+                                .catch((error) => {
+                                    console.log("Error has been found:", error);
+                                });
+                                cname=predecessor(cname);
+                        });
+
+                       
+                        document.body.appendChild(button);
+                    })
+                    .catch((error) => {
+                        console.log("Error has been found:", error);
+                    });
+            };
+
+            while (name !== '999') {
+                fetchData();
+                name = predecessor(name);
+            }
+        }
