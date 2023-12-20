@@ -106,57 +106,60 @@ while (memberId != '999') {
         .catch(error => console.log(error));
     memberId = predecessor(memberId);
 }
- function execute() {
-            let name = 'AAA';
-            const fetchData = () => {
-                fetch("mathcontest01/" + name + ".json")
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("There is an error here");
-                        }
-                        return response.text();
-                    })
-                    .then(textdata => {
-                        const open = document.getElementById("open");
-                        open.textContent = textdata;
+const button = document.createElement('button');
+button.textContent = "mathcontest details";
 
-                         eventsList.appendChild("open");
-                        const button = document.createElement("button");
-                        button.textContent = "contents";
+button.addEventListener("click", function execute() {
+    let name = 'AAA';
+    const fetchData = () => {
+        fetch("mathcontest01/" + name + ".json")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("There is an error here");
+                }
+                return response.text();
+            })
+            .then(textdata => {
+                const open = document.createElement("div"); // Change this to an appropriate element
+                open.textContent = textdata;
 
-                       
-                        button.addEventListener("click", function () {
-                            const cname = 'AAA'; //change this if needed
-                            fetch("content/" + cname + ".json")
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error("There is an error here");
-                                    }
-                                    return response.text();
-                                })
-                                .then(textdata => {
-                                    const content = document.getElementById("content");
-                                    content.textContent = textdata;
-                                })
-                                .catch((error) => {
-                                    console.log("Error has been found:", error);
-                                });
-                              eventsList.appendChild("content");
-                                cname=predecessor(cname);
+                // Append the created element, not the string
+                eventsList.appendChild(open);
+
+                const contentButton = document.createElement("button");
+                contentButton.textContent = "contents";
+
+                contentButton.addEventListener("click", function () {
+                    const cname = 'AAA'; // Change this if needed
+                    fetch("content/" + cname + ".json")
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("There is an error here");
+                            }
+                            return response.text();
+                        })
+                        .then(textdata => {
+                            const content = document.createElement("div"); // Change this to an appropriate element
+                            content.textContent = textdata;
+                            eventsList.appendChild(content); // Append the created element
+                        })
+                        .catch((error) => {
+                            console.log("Error has been found:", error);
                         });
+                    // Assuming predecessor is defined and working correctly
+                    cname = predecessor(cname);
+                });
 
-                       
-                        document.body.appendChild(button);
-                    })
-                    
-                    .catch((error) => {
-                        console.log("Error has been found:", error);
-                    });
-                
-            };
+                document.body.appendChild(contentButton);
+            })
+            .catch((error) => {
+                console.log("Error has been found:", error);
+            });
+    };
 
-            while (name !== '999') {
-                fetchData();
-                name = predecessor(name);
-            }
-        }
+    while (name !== '999') {
+        fetchData();
+        // Assuming predecessor is defined and working correctly
+        name = predecessor(name);
+    }
+});
