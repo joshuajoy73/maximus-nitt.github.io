@@ -79,3 +79,6 @@ section {
     height: 256px;
     background: var(--b1);
 }
+.top{
+    font-size:50px;
+}
